@@ -1,30 +1,84 @@
-// Replace checkForName with a function that checks the URL
-import { checkForName } from './nameChecker'
-
-// If working on Udacity workspace, update this with the Server API URL e.g. `https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api`
-// const serverURL = 'https://wfkdhyvtzx.prod.udacity-student-workspaces.com/api'
+import axios from 'axios';
+import { checkURL } from './URLChecker';
 const serverURL = 'https://localhost:8000/api'
-
-const form = document.getElementById('urlForm');
-form.addEventListener('submit', handleSubmit);
-
-function handleSubmit(event) {
-    event.preventDefault();
-
-    // Get the URL from the input field
-    const formText = document.getElementById('name').value;
-
-    // This is an example code that checks the submitted name. You may remove it from your code
-    checkForName(formText);
-    
-    // Check if the URL is valid
+const infoCard = document.querySelector('.card');
+const scoreTagEl = infoCard.querySelector('#score-tag');
+const agreementEl =  infoCard.querySelector('#agreement');
+const ironyEl = infoCard.querySelector('#irony');
+const confidenceEl =  infoCard.querySelector('#confidence');
+const subjectivityEl = infoCard.querySelector('#subjectivity');
+const parentEl = infoCard.parentElement;
+const errorElement = document.querySelector(".error");
  
-        // If the URL is valid, send it to the server using the serverURL constant above
-      
+
+
+async function handleSubmit(event) {
+ 
+    event.preventDefault();
+    
+    const input = document.querySelector('#url'); 
+    if(!checkURL(input.value)){
+        return show_error('Please, enter a Valid url');
+    }
+    
+    try {  
+        
+        const response = await axios.post('http://localhost:8000/post', {
+            input: input.value
+        });
+        const analysis = response.data.analysis;
+        if(analysis.code == 100){
+            show_error(analysis.msg);
+        }
+        if(analysis.code == 0){
+            show_info(analysis.sample);
+        }
+        if(analysis.code == 212){
+            show_error(analysis.msg)
+        }
+        
+
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+window.addEventListener('DOMContentLoaded',function(){
+    const form = document.getElementById('urlForm');
+
+    form.addEventListener('submit', handleSubmit);
+
+})
+
+const show_error=(msg)=>{
+     if(parentEl.classList.contains('active')){
+        parentEl.classList.remove('active');
+        parentEl.classList.add('non-active')
+    }
+    errorElement.querySelector('.error__title').innerHTML=msg;
+    errorElement.classList.remove('non-active')
+    errorElement.classList.add("acitive");
+   
+    
+    
 }
 
-// Function to send data to the server
 
-// Export the handleSubmit function
+const show_info = (sample)=>{
+    agreementEl.innerHTML="Agreemnt : "+sample.agreement.toLowerCase() ;
+    scoreTagEl.innerHTML="Score Tag : "+sample.score_tag.toLowerCase();
+    ironyEl.innerHTML="Irony : "+sample.irony.toLowerCase();
+    confidenceEl.innerHTML='Confidence : '+ sample.confidence.toLowerCase();
+    subjectivityEl.innerHTML = "Subjectivity : "+sample.subjectivity.toLowerCase();
+    
+    parentEl.classList.remove('non-active')
+    parentEl.classList.add('active');
+    
+    errorElement.classList.remove('active');
+    errorElement.classList.add('non-active');
+    
+
+
+}
+
 export { handleSubmit };
 

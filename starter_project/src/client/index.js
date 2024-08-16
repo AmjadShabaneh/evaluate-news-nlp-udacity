@@ -1,9 +1,14 @@
-// js files
 import { handleSubmit } from './js/formHandler'
+import { checkURL } from './js/URLChecker'
 
+import './styles/resets.scss'
+import './styles/base.scss'
+import './styles/card.scss'
+import './styles/form.scss'
+import './styles/header.scss'
+import './styles/error.scss'
 
-
-// alert("I EXIST")
-// console.log("CHANGE!!");
-
-// sass files
+export {
+    handleSubmit,
+    checkURL
+}

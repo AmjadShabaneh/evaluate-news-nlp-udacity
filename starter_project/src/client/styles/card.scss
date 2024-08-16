@@ -1,0 +1,37 @@
+/* From Uiverse.io by csozidev */ 
+/* glowing hover card made by: csozi | Website: english.csozi.hu*/
+$main-color:#00ff1e;
+$secondary-color:#0a68f4;
+/* From Uiverse.io by Spacious74 */ 
+.bglinear {
+   
+    padding: 1px;
+    border-radius: 1.2rem;
+    box-shadow: 0px 1rem 1.5rem -0.9rem #000000e1;
+    max-width: 300px;
+    margin: auto;
+    box-shadow: -15px -10px 30px -5px $main-color,
+    15px -10px 30px -5px $secondary-color,
+    15px 10px 30px -5px $secondary-color,
+    -15px 10px 30px -5px $secondary-color;
+  }
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1rem;
+    color: #34373c;
+    background: linear-gradient(
+        to right,
+        #434343,#161414
+      );
+    padding: 1.5rem;
+    border-radius: 1.2rem;
+    div{
+        color: #fdfeff;
+        border-radius: 50px;
+        max-width: fit-content;
+    }
+  }
+  

@@ -1,8 +1,14 @@
+*{
+    color: white;
+    font-family:Arial, Helvetica, sans-serif;
+}
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background-color: #212121;
 }
+
 
 main {
     flex: 2;
