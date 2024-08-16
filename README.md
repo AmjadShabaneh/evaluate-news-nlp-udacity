@@ -19,8 +19,5 @@ form and it will return sentiment analysis for you.
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like
 to change.
-## License
-MIT License
-Copyright (c) 2024 Amjad Shabaneh
 ## Contact
 For more information or to report any issues, please contact me at amjadoffcial23@gmail.com I will be happy to assist you.
